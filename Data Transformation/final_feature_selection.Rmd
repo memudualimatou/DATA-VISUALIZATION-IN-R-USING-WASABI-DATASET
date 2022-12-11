@@ -1,0 +1,98 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Load all data
+```{r}
+library(readr)
+library(dplyr)
+
+albums <- readRDS("C:/Users/Alimat sadia/Desktop/MSC DS &  AI/Data visualization/wasabi data22/OneDrive_1_11-19-2022/data/albums_all_artists_3000.rds")
+
+artists<- readRDS("C:/Users/Alimat sadia/Desktop/MSC DS &  AI/Data visualization/wasabi data22/OneDrive_1_11-19-2022/data/wasabi_all_artists_3000.rds")
+
+songs <- readRDS("C:/Users/Alimat sadia/Desktop/MSC DS &  AI/Data visualization/wasabi data22/OneDrive_1_11-19-2022/data/songs_all_artists_3000.rds")
+```
+
+# Song data
+```{r}
+
+df <- head(songs,500)
+df
+```
+
+
+```{r}
+colnames(songs)
+colSums(is.na(songs))
+```
+
+
+
+
+```{r}
+library (stringr)
+song_features <- songs %>% select(id, id_album,publicationDate, genre,availableCountries)
+song_features<- song_features %>% filter(!is.na(availableCountries)) %>%
+  mutate(count_availablecountry = str_count(availableCountries, ",")+1)
+
+
+
+song_features[song_features== "NULL"|song_features== ""] <- NA
+
+
+song_features
+```
+
+# Album
+```{r}
+
+albums <- rename(albums, "id_album" = "_id")
+df <- head(albums,500)
+df
+```
+
+```{r}
+colnames(albums)
+colSums(is.na(albums))
+```
+
+
+
+```{r}
+albums_features <- albums %>% select(id_artist, id_album, genre, publicationDate, deezerFans)
+albums_features[albums_features== "NULL"|albums_features== ""] <- NA
+sum(is.na(albums_features))
+colSums(is.na(albums_features))
+```
+
+# Artists
+```{r}
+
+df <- head(artists,500)
+df
+```
+
+```{r}
+colnames(artists)
+colSums(is.na(artists))
+```
+
+```{r}
+artists_features <- artists %>% select(id,gender, lifeSpan.ended,locationInfo,dbp_genre)
+artists_features
+```
+
+```{r}
+artists_features[artists_features== "NULL"|artists_features== ""] <- NA
+sum(is.na(artists_features))
+colSums(is.na(artists_features))
+```
+
+```{r}
+write_csv(song_features, "song_features_final.csv")
+write_csv(albums_features, "albums_features_final.csv")
+write_csv(artists_features, "artists_features_final.csv")
+```
+
