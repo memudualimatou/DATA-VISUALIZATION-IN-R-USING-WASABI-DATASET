@@ -1,5 +1,6 @@
 library(dplyr)
-  
+library(readr)
+library (stringr)
 # Preprocess Data
 ## 1) Data Cleaning
 #### · Artist Data
@@ -91,6 +92,9 @@ song_data1
 colSums(is.na(song_data1))
 song_data1
     
+# create count)available country column
+song_data1<- song_data1 %>% filter(!is.na(availableCountries)) %>%
+  mutate(count_availablecountry = str_count(availableCountries, ",")+1)
 
 #1. Extract year from publication data 
    
@@ -354,6 +358,15 @@ global_data1
 #save the file
 write.csv(global_data1,"final_data.csv")
     
+
+
+
+
+
+
+
+
+
 
 
 
