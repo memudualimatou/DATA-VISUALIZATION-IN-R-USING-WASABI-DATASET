@@ -5,7 +5,7 @@ library(highcharter)
 library(hpackedbubble)
 library(purrr)
 
-wasabi <- read.csv("final_data0.csv") 
+wasabi <- read.csv("final_data.csv") 
 cont <- unique(wasabi$country)
 # Define UI for application that draws a histogram
 ui <- fluidPage(
