@@ -1,6 +1,9 @@
 
 
 
+
+
+
 setwd("C:/Users/Alimat sadia/Desktop/MSC DS &  AI/Data visualization/Work project")
 library(shiny)
 library(highcharter)
@@ -8,7 +11,7 @@ library(dplyr)
 library(ggplot2)
 library(plotly)
 
-my_data <- read.csv('final_data0.csv')
+my_data <- read.csv('final_data.csv')
 
 
 wmap <- hcmap(showInLegend = FALSE)
