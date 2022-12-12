@@ -1,6 +1,7 @@
 
 
 
+
 library(readr)
 library(dplyr)
 library (stringr)
@@ -12,9 +13,7 @@ songs <- readRDS("C:/Users/Alimat sadia/Desktop/MSC DS &  AI/Data visualization/
 colnames(songs)
 colSums(is.na(songs))
 
-song_features <- songs %>% select(id, id_album,publicationDate, genre,availableCountries)
-song_features<- song_features %>% filter(!is.na(availableCountries)) %>%
-  mutate(count_availablecountry = str_count(availableCountries, ",")+1)
+song_features <- songs %>% select(id, id_album,publicationDate,availableCountries)
 
 
 song_features[song_features== "NULL"|song_features== ""] <- NA
@@ -45,3 +44,4 @@ colSums(is.na(artists_features))
 write.csv(song_features, "song_features_final.csv")
 write.csv(albums_features, "albums_features_final.csv")
 write.csv(artists_features, "artists_features_final.csv")
+
